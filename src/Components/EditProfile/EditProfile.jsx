@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { FaCamera, FaUpload, FaEdit } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-
-const backendUrl = "http://localhost:4000";
+import { AppContext } from "../../context/AppContext.jsx";
 
 const EditProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const navigate = useNavigate();
+  const { backendUrl } = useContext(AppContext);
 
   const [profileData, setProfileData] = useState({
     name: "",

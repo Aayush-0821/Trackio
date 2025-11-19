@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import Footer from "../../Components/Footer/Footer";
 import { toast } from "react-toastify";
+import { AppContext } from "../../context/AppContext";
 
 // ==========================================================
 // ✅ First ContactUs component (original structure)
@@ -14,6 +15,7 @@ export const ContactUs = ({ theme }) => {
     });
 
     const [errors, setErrors] = useState({});
+    const { backendUrl } = useContext(AppContext);
 
     // Refs for inputs
     const firstNameRef = useRef(null);
@@ -67,7 +69,7 @@ export const ContactUs = ({ theme }) => {
         e.preventDefault();
         if (validate()) {
             try {
-                const response = await fetch("http://localhost:4000/api/contact/send-complaint",{
+                const response = await fetch(`${backendUrl}/api/contact/send-complaint`,{
                     method:"POST",
                     headers:{
                         "Content-Type":"application/json",

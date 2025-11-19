@@ -3,6 +3,7 @@ import joinGroupbgLight from '../../assets/joinGroupbgLight.png'
 import joinGroupbgDark from '../../assets/joinGroupbgDark.png'
 import { useForm } from "react-hook-form";
 import { toast } from 'react-toastify';
+import { AppContext } from '../../context/AppContext';
 
 const JoinGroup = ({ close4 , theme}) => {
   const {
@@ -11,6 +12,8 @@ const JoinGroup = ({ close4 , theme}) => {
     formState: { errors },
   } = useForm();
 
+  const { backendUrl } = useContext(AppContext);
+
   const onSubmit = async (data) => {
     const payload = {
       groupName:data.groupName,
@@ -18,7 +21,7 @@ const JoinGroup = ({ close4 , theme}) => {
     };
 
     try {
-      const response = await fetch("http://localhost:4000/api/group/join",{
+      const response = await fetch(`${backendUrl}/api/group/join`,{
         method:"POST",
         headers:{
           "Content-Type":"application/json",

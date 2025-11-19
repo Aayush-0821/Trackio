@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import createGroupbgLight from "../../assets/createGroupbgLight.png";
 import createGroupbgDark from "../../assets/createGroupbgDark.png";
 import { toast } from "react-toastify";
+import { AppContext } from "../../context/AppContext";
 
 const CreateGroup = ({ close3, theme }) => {
   const {
@@ -13,6 +14,7 @@ const CreateGroup = ({ close3, theme }) => {
 
   const [task, setTask] = useState("");
   const [todos, setTodos] = useState([]);
+  const { backendUrl } = useContext(AppContext);
 
   const addTodo = (e) => {
     e.preventDefault();
@@ -34,7 +36,7 @@ const CreateGroup = ({ close3, theme }) => {
     };
 
     try {
-      const response = await fetch("http://localhost:4000/api/group/create", {
+      const response = await fetch(`${backendUrl}/api/group/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
