@@ -1,6 +1,3 @@
-import dotenv from 'dotenv';
-dotenv.config({ path: './.env' });
-
 import { v2 as cloudinary } from "cloudinary";
 
 cloudinary.config({
@@ -17,7 +14,7 @@ export const uploadOnCloudinary = async (fileBuffer, folder = "general") => {
 
     const result = await new Promise((resolve, reject) => {
       cloudinary.uploader.upload_stream(
-        { folder, resource_type: "auto" },   // removed public_id
+        { folder, resource_type: "auto" },
         (error, result) => {
           if (error) reject(error);
           else resolve(result);
