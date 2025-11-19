@@ -2,8 +2,6 @@ import dotenv from 'dotenv';
 dotenv.config({ path: './.env' });
 
 import { v2 as cloudinary } from "cloudinary";
-import fs from "fs";
-import path from "path";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -11,27 +9,24 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-export const uploadOnCloudinary = async (localFilePath, folder = "general") => {
+export const uploadOnCloudinary = async (fileBuffer, folder = "general") => {
   try {
-    if (!localFilePath || !fs.existsSync(localFilePath)) {
-      throw new Error("Local File path is invalid or does not exist!");
+    if (!fileBuffer) {
+      throw new Error("No file buffer provided!");
     }
-    const fileExtension = path.extname(localFilePath).toLowerCase();
 
-    const isImage = [".jpg", ".jpeg", ".png", ".gif", ".webp"].includes(fileExtension);
-    const isPDF = fileExtension === ".pdf";
+    const result = await new Promise((resolve, reject) => {
+      cloudinary.uploader.upload_stream(
+        { folder, resource_type: "auto" },   // removed public_id
+        (error, result) => {
+          if (error) reject(error);
+          else resolve(result);
+        }
+      ).end(fileBuffer);
+    });
 
-    const options = {
-      folder,
-      resource_type: isImage ? "image" : "raw",
-      ...(isImage ? {} : { format: "pdf" }) 
-    };
-
-    const result = await cloudinary.uploader.upload(localFilePath, options);
-    fs.unlinkSync(localFilePath);
     return result;
   } catch (error) {
-    if (fs.existsSync(localFilePath)) fs.unlinkSync(localFilePath);
     console.error("Cloudinary upload failed:", error);
     throw new Error(error.message || "Cloudinary upload failed");
   }

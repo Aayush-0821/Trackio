@@ -3,32 +3,21 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { apiError } from "../utils/apiError.js";
 import { apiResponse } from "../utils/apiResponse.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
-import fs from "fs";
 import mongoose from "mongoose";
 
 const addResource = asyncHandler(async (req, res) => {
-
   const { title, description, groupId } = req.body;
 
-  if (!req.file) {
-    console.error("Missing file in request");
-    throw new apiError(400, "File is Required !");
-  }
+  if (!req.file) throw new apiError(400, "File is Required!");
 
-  if (!title || !groupId) {
-    console.error("Missing required fields:", { title, groupId });
-    throw new apiError(400, "All fields are required !");
-  }
+  if (!title || !groupId) throw new apiError(400, "All fields are required!");
 
   if (!mongoose.Types.ObjectId.isValid(groupId)) {
-    console.error("Invalid groupId format:", groupId);
     throw new apiError(400, `Invalid groupId format: ${groupId}`);
   }
 
   try {
-    const localFilePath = req.file.path;
-
-    const uploadResult = await uploadOnCloudinary(localFilePath,"resources");
+    const uploadResult = await uploadOnCloudinary(req.file.buffer, "resources");
 
     const newResource = await Resource.create({
       title,
@@ -49,20 +38,21 @@ const addResource = asyncHandler(async (req, res) => {
   }
 });
 
-const getResourcesByGroup = asyncHandler(async(req,res)=>{
-    const {groupId} = req.params;
+const getResourcesByGroup = asyncHandler(async (req, res) => {
+  const { groupId } = req.params;
 
-    if(!groupId){
-        throw new apiError(400,"Group ID is required");
-    }
+  if (!groupId) {
+    throw new apiError(400, "Group ID is required");
+  }
 
-    const resources = await Resource.find({groupId}).populate(
-        "addedBy",
-        "name email",
-    );
+  const resources = await Resource.find({ groupId }).populate(
+    "addedBy",
+    "name email"
+  );
 
-    return res.status(200)
-    .json(new apiResponse(200,resources,"Resources fetched SuccessFully !"));
-})
+  return res
+    .status(200)
+    .json(new apiResponse(200, resources, "Resources fetched SuccessFully!"));
+});
 
-export {addResource,getResourcesByGroup};
+export { addResource, getResourcesByGroup };
