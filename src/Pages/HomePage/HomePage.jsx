@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import target from "../../assets/target.svg";
 import targetBlack from "../../assets/targetBlack.svg";
-import skill from "../../assets/skill.svg";
+import skill from "../../assets/Skill.svg";
 import Code from "../../assets/Code.svg";
 import Circle from "../../assets/Circle.svg";
 import Squigle from "../../assets/Squigle.svg";
