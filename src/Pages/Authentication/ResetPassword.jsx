@@ -45,7 +45,7 @@ function ResetPassword() {
     try {
       const {data} = await axios.post(backendUrl+'/api/auth/send-reset-otp',{email},{
         withCredentials:true,
-        Authorization: `Bearer ${localStorage.getItem(token)}`
+        Authorization: `Bearer ${localStorage.getItem("token")}`
       })
       data.success?toast.success(data.message):toast.error(data.message);
       data.success && setIsEmailSent(true);
@@ -66,7 +66,7 @@ function ResetPassword() {
     try {
       const {data} = await axios.post(backendUrl+'/api/auth/reset-password',{email,otp,newPassword},{
         withCredentials:true,
-        Authorization: `Bearer ${localStorage.getItem(token)}`
+        Authorization: `Bearer ${localStorage.getItem("token")}`
       })
       data.success ? toast.success(data.message) : toast.error(data.message);
       data.success && navigate('/login')

@@ -28,7 +28,7 @@ const EditProfile = () => {
         const { data } = await axios.get(`${backendUrl}/api/user/getUserData`, {
           withCredentials: true,
           headers:{
-            Authorization: `Bearer ${localStorage.getItem(token)}`
+            Authorization: `Bearer ${localStorage.getItem("token")}`
           }
         });
 
@@ -74,7 +74,7 @@ const EditProfile = () => {
         formData,
         {
           withCredentials: true,
-          headers: { "Content-Type": "multipart/form-data",Authorization: `Bearer ${localStorage.getItem(token)}` },
+          headers: { "Content-Type": "multipart/form-data",Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
       );
 
@@ -108,7 +108,7 @@ const EditProfile = () => {
         {
           withCredentials: true,
           headers: { "Content-Type": "multipart/form-data" },
-          Authorization: `Bearer ${localStorage.getItem(token)}`
+          Authorization: `Bearer ${localStorage.getItem("token")}`
         }
       );
 

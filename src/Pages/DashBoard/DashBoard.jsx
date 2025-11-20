@@ -51,7 +51,7 @@ function DashBoard({ theme }) {
         `${backendUrl}/api/auth/logout`,
         {},
         { withCredentials: true,
-          Authorization: `Bearer ${localStorage.getItem(token)}`
+          Authorization: `Bearer ${localStorage.getItem("token")}`
          }
       );
       if (data.success) {
@@ -75,7 +75,7 @@ function DashBoard({ theme }) {
           `${backendUrl}/api/user/updateStreak`,
           {},
           { withCredentials: true,
-            Authorization: `Bearer ${localStorage.getItem(token)}`
+            Authorization: `Bearer ${localStorage.getItem("token")}`
            }
         );
         if (data.success) {
@@ -95,7 +95,7 @@ function DashBoard({ theme }) {
         const { data } = await axios.get(
           `${backendUrl}/api/group/my-groups`,
           { withCredentials: true,
-            Authorization: `Bearer ${localStorage.getItem(token)}`
+            Authorization: `Bearer ${localStorage.getItem("token")}`
            }
         );
         if (data.success) {

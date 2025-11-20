@@ -57,7 +57,7 @@ function EmailVerify({ theme }) {
 
       const { data } = await axios.post(backendUrl + '/api/auth/verify-account', { otp },
         {
-          Authorization: `Bearer ${localStorage.getItem(token)}`,
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
           withCredentials:true
         }
       );

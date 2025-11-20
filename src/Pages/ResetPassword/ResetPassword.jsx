@@ -56,7 +56,7 @@ function ResetPassword({ theme }) {
     e.preventDefault();
     try {
       const { data } = await axios.post(`${backendUrl}/api/auth/send-reset-otp`, { email },{
-        Authorization: `Bearer ${localStorage.getItem(token)}`
+        Authorization: `Bearer ${localStorage.getItem("token")}`
       });
       if (data.success) {
         toast.success(data.message);
@@ -89,7 +89,7 @@ function ResetPassword({ theme }) {
         otp,
         newPassword,
       },{
-        Authorization: `Bearer ${localStorage.getItem(token)}`
+        Authorization: `Bearer ${localStorage.getItem("token")}`
       });
       if (data.success) {
         toast.success(data.message);
