@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import joinGroupbgLight from '../../assets/joinGroupbgLight.png'
 import joinGroupbgDark from '../../assets/joinGroupbgDark.png'
 import { useForm } from "react-hook-form";
