@@ -14,6 +14,11 @@ export const AppContextProvider = (props) => {
     // 1. Add Loading State (Default to true so we wait for the check)
     const [isLoading, setIsLoading] = useState(true);
 
+    useEffect(()=>{
+        if(localStorage.getItem("token")){
+            setIsLoggedIn(true);
+        }
+    })
     const getUserData = async () => {
         try {
             const { data } = await axios.get(backendUrl + '/api/user/getUserData',{

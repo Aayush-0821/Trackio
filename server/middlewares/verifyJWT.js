@@ -19,6 +19,8 @@ export const verifyJWT =  async (req, res, next) => {
     if(!user){
       return res.status(404).json({success:false,message:"User Not Found"});
     }
+
+    req.user = user
     next();
   } catch (error) {
     console.error("JWT Verification Failed:", error.message);
