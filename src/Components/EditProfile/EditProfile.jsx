@@ -70,13 +70,16 @@ const EditProfile = () => {
       if (newProfilePic) formData.append("profilePic", newProfilePic);
 
       const { data } = await axios.put(
-        `${backendUrl}/api/user/update-profile`,
-        formData,
-        {
-          withCredentials: true,
-          headers: { "Content-Type": "multipart/form-data",Authorization: `Bearer ${localStorage.getItem("token")}` },
-        }
-      );
+  `${backendUrl}/api/user/update-profile`,
+  formData,
+  {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  }
+);
+
 
       if (data.success) {
         toast.success("Profile Updated Successfully!");
