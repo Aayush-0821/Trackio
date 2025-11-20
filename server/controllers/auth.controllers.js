@@ -88,7 +88,9 @@ const loginUser = asyncHandler(async (req, res) => {
         process.env.JWT_SECRET,
         { expiresIn: '7d' }
     );
-    res.headers.set("Set-Cookie",`token=${token}; HttpOnly; Secure=true; Path=/; Max-Age=604800000`)
+    // res.headers.set("Set-Cookie",`token=${token}; HttpOnly; Secure=true; Path=/; Max-Age=604800000`)
+    res.setHeader("Set-Cookie", `token=${token}; HttpOnly; Secure; Path=/; Max-Age=${7 * 24 * 60 * 60}`);
+
     res.cookie('token', token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
