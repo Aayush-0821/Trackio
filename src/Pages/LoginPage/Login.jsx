@@ -22,7 +22,7 @@ function Login({ close }) {
       const response = await axios.post(`${backendUrl}/api/auth/login`, {
         email,
         password,
-      });
+      },{withCredentials:true});
 
       if (response.data.success) {
         toast.success(response.data.message || "Login Successful!");
