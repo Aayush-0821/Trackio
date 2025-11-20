@@ -10,7 +10,7 @@ function Navbar( {onLoginClick , onSignupClick}) {
         <h1>Trackio</h1>
       </div>
 
-      <div className="hidden md:flex space-x-8 text-stone-200 text-lg font-medium">
+      <div className="hidden space-x-8 text-stone-200 text-lg font-medium">
         <div className="relative group cursor-pointer">
         <div className="relative group">
           Home

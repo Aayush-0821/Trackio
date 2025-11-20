@@ -206,9 +206,9 @@ useEffect(() => {
               <div className="absolute top-218 -right-150 autoShow">
                 <ProfileCard
                   ProfilePicture={Picture_Aayush}
-                  Name="Aayush Verma"
+                  Name="Aayush Vats"
                   role="Backend"
-                  github_id="aaravg192"
+                  github_id="https://github.com/Aayush-0821"
                   linkedinUrl="https://www.linkedin.com/in/aarav-goyal-b8b35a307"
                   description="FullStack Developer of this project with expertise in React and Express."
                 />
