@@ -10,7 +10,7 @@ const handleChat = asyncHandler(async (req, res) => {
 
   const refererUrl = process.env.BACKEND_URL || req.headers.origin;
 
-  const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+  const response = await fetch(process.env.OPENROUTER_API_URL, {
     method: "POST",
     headers: {
       "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,

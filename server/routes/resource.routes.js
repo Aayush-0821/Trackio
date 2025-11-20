@@ -4,7 +4,10 @@ import { addResource, getResourcesByGroup } from "../controllers/resource.contro
 import { verifyJWT } from "../middlewares/verifyJWT.js";
 
 const router = express.Router();
-const upload = multer({ dest: "uploads/" });
+
+// Use memory storage — NO folder creation, NO disk writes
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
 router.post("/add", verifyJWT, upload.single("file"), addResource);
 router.get("/:groupId", verifyJWT, getResourcesByGroup);
