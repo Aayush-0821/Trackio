@@ -89,7 +89,7 @@ const loginUser = asyncHandler(async (req, res) => {
         { expiresIn: '7d' }
     );
     // res.headers.set("Set-Cookie",`token=${token}; HttpOnly; Secure=true; Path=/; Max-Age=604800000`)
-    res.setHeader("Set-Cookie", `token=${token}; HttpOnly; Secure; SameSite=None Path=/; Max-Age=${7 * 24 * 60 * 60}`);
+    res.setHeader("Set-Cookie", `token=${token}; HttpOnly; Secure; SameSite=Strict Path=/; Max-Age=${7 * 24 * 60 * 60}`);
 
     res.cookie('token', token, {
         httpOnly: true,

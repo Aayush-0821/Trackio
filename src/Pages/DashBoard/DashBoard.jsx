@@ -50,7 +50,9 @@ function DashBoard({ theme }) {
       const { data } = await axios.post(
         `${backendUrl}/api/auth/logout`,
         {},
-        { withCredentials: true }
+        { withCredentials: true,
+          Authorization: `Bearer ${localStorage.getItem(token)}`
+         }
       );
       if (data.success) {
         toast.success(data.message || "Logged Out Successfully !");
@@ -72,7 +74,9 @@ function DashBoard({ theme }) {
         const { data } = await axios.post(
           `${backendUrl}/api/user/updateStreak`,
           {},
-          { withCredentials: true }
+          { withCredentials: true,
+            Authorization: `Bearer ${localStorage.getItem(token)}`
+           }
         );
         if (data.success) {
           setStreakData({
@@ -90,7 +94,9 @@ function DashBoard({ theme }) {
       try {
         const { data } = await axios.get(
           `${backendUrl}/api/group/my-groups`,
-          { withCredentials: true }
+          { withCredentials: true,
+            Authorization: `Bearer ${localStorage.getItem(token)}`
+           }
         );
         if (data.success) {
           setGroups(data.groups);

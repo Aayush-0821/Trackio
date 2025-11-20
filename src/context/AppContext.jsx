@@ -17,7 +17,8 @@ export const AppContextProvider = (props) => {
     const getUserData = async () => {
         try {
             const { data } = await axios.get(backendUrl + '/api/user/getUserData',{
-                withCredentials:true
+                withCredentials:true,
+                Authorization: `Bearer ${localStorage.getItem(token)}`
             });
             if (data.success) {
                 setIsLoggedIn(true);
