@@ -110,8 +110,11 @@ const EditProfile = () => {
         formData,
         {
           withCredentials: true,
-          headers: { "Content-Type": "multipart/form-data" },
-          Authorization: `Bearer ${localStorage.getItem("token")}`
+          headers: { 
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+           },
+          
         }
       );
 
