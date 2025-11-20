@@ -14,16 +14,19 @@ export const AppContextProvider = (props) => {
     // 1. Add Loading State (Default to true so we wait for the check)
     const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(()=>{
-        if(localStorage.getItem("token")){
-            setIsLoggedIn(true);
-        }
-    })
+    // useEffect(()=>{
+    //     if(localStorage.getItem("token")){
+    //         setIsLoggedIn(true);
+    //     }
+    // })
     const getUserData = async () => {
         try {
             const { data } = await axios.get(backendUrl + '/api/user/getUserData',{
                 withCredentials:true,
-                Authorization: `Bearer ${localStorage.getItem("token")}`
+                headers:{
+
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
             });
             console.log(data)
             if (data.success) {
@@ -35,6 +38,7 @@ export const AppContextProvider = (props) => {
             }
         } catch (error) {
             // If error (e.g. 401 unauthorized), ensure we are logged out
+            console.log(error)
             setIsLoggedIn(false);
             setUserData(null);
             // Optional: Only toast on specific errors, not just "not logged in"

@@ -10,6 +10,7 @@ import taskRoutes from "./routes/task.routes.js";
 import resourceRoutes from "./routes/resource.routes.js";
 import chatBotRoutes from "./routes/chatBot.routes.js";
 import path from "path";
+import 'dotenv/config'
 
 const app = express();
 const port = process.env.PORT || 4000;

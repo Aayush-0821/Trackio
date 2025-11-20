@@ -13,7 +13,6 @@ function DashBoard({ theme }) {
   const { backendUrl, setIsLoggedIn, userData, getUserData } = useContext(AppContext);
   const navigate = useNavigate();
   const [showEditProfile, setShowEditProfile] = useState(false);
-
   const [groups, setGroups] = useState([]);
   const [streakData, setStreakData] = useState({
     streak: 0,
@@ -48,14 +47,17 @@ function DashBoard({ theme }) {
   const handleLogout = async () => {
     try {
       const { data } = await axios.post(
-        `${backendUrl}/api/auth/logout`,
-        {},
+        `${backendUrl}/api/auth/logout`,{},
         { withCredentials: true,
-          Authorization: `Bearer ${localStorage.getItem("token")}`
+         headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
          }
       );
+      
       if (data.success) {
         toast.success(data.message || "Logged Out Successfully !");
+        localStorage.clear();
         setIsLoggedIn(false);
         navigate("/");
       } else {
@@ -72,10 +74,11 @@ function DashBoard({ theme }) {
     const updateUserStreak = async () => {
       try {
         const { data } = await axios.post(
-          `${backendUrl}/api/user/updateStreak`,
-          {},
+          `${backendUrl}/api/user/updateStreak`,{},
           { withCredentials: true,
-            Authorization: `Bearer ${localStorage.getItem("token")}`
+            headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
            }
         );
         if (data.success) {
@@ -95,7 +98,9 @@ function DashBoard({ theme }) {
         const { data } = await axios.get(
           `${backendUrl}/api/group/my-groups`,
           { withCredentials: true,
-            Authorization: `Bearer ${localStorage.getItem("token")}`
+            headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
            }
         );
         if (data.success) {
